@@ -1,40 +1,40 @@
 # adding-k8s-suer-martin
  
  
- task:
+## task:
  
-Build user information for martin in the default kubeconfig file: User = martin , client-key = /root/martin.key and client-certificate = /root/martin.crt
+###Build user information for martin in the default kubeconfig file: User = martin , client-key = /root/martin.key and client-certificate = /root/martin.crt
 
-Create a new context called 'developer' in the default kubeconfig file with 'user = martin' and 'cluster = kubernetes'
+###Create a new context called 'developer' in the default kubeconfig file with 'user = martin' and 'cluster = kubernetes'
 
  
  
  
-kubectl get ns
-    2  kubectl get pods -n development
-    3  openssl req -new -key jbeda.pem -out jbeda-csr.pem -subj "/CN=jbeda/O=developer"
-    4  openssl genrsa -out martin.key 2048
-    5  openssl req -new -key martin.key -out martin.csr -subj "/CN=martin/O=developer"
-    6  
-    8  ls /etc/kubernetes/pki/
-    9  ls
-   28  cp /etc/kubernetes/pki/ca.crt .
-   29  cp /etc/kubernetes/pki/ca.key .
-   30  openssl x509 -req -in martin.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out martin.crt -days 3540
-   31  ls
-   32  kubectl config get-users
-   33  kubectl config set-credentials jean   --client-certificate=/home/jean/.certs/jean.crt   --client-key=martin.key
-   34  kubectl config set-credentials martin   --client-certificate=martin.crt   --client-key=martin.key
-   35  kubectl config get-users
-   36  history
+## kubectl get ns
+###    2  kubectl get pods -n development
+###   3  openssl req -new -key jbeda.pem -out jbeda-csr.pem -subj "/CN=jbeda/O=developer"
+###    4  openssl genrsa -out martin.key 2048
+###   5  openssl req -new -key martin.key -out martin.csr -subj "/CN=martin/O=developer"
+###    6  
+ ###   8  ls /etc/kubernetes/pki/
+ ###   9  ls
+###   28  cp /etc/kubernetes/pki/ca.crt .
+###   29  cp /etc/kubernetes/pki/ca.key .
+###   30  openssl x509 -req -in martin.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out martin.crt -days 3540
+###   31  ls
+###   32  kubectl config get-users
+###   33  kubectl config set-credentials jean   --client-certificate=/home/jean/.certs/jean.crt   --client-key=martin.key
+###   34  kubectl config set-credentials martin   --client-certificate=martin.crt   --client-key=martin.key
+ ###  35  kubectl config get-users
+###   36  history
    # New is create in kubeconfig after the above steps
    
    # below steps give autho and authentification
-   
+ ```  
    kubectl create role developer-role --verb=* --resource=*
     kubectl describe role developer-role -n development
-    
-    
+    ```
+```    
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -48,6 +48,7 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: User
   name: user-1
+```
   
   # add user
   https://www.adaltas.com/en/2019/08/07/users-rbac-kubernetes/
