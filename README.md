@@ -36,9 +36,10 @@ subjects:
   kind: User
   name: user-1
   
+  # add user
+  https://www.adaltas.com/en/2019/08/07/users-rbac-kubernetes/
   
-  
- 
+ # CREATE KUBECONFIG FILE
  
  
  
