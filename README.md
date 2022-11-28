@@ -20,3 +20,25 @@ kubectl get ns
    
    kubectl create role developer-role --verb=* --resource=*
     kubectl describe role developer-role -n development
+    
+    
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: role-grantor-binding
+  namespace: user-1-namespace
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: role-grantor
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: user-1
+  
+  
+  
+ 
+ 
+ 
+ 
